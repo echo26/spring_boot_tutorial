@@ -1,36 +1,37 @@
 package com.example.demo.config;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
-import com.example.demo.entity.HomeEntity;
-import com.example.demo.service.homeService;
+import com.example.demo.entity.Book;
+import com.example.demo.service.BookService;
 
 @Component
 public class initialDataConfig implements CommandLineRunner {
 
     @Autowired
-    private homeService homeService;
+    private BookService bookService;
 
     @Override
-    public void run (String... args) throws Exception {
+    public void run(String... args) throws Exception {
+        List<Book> books = bookService.getAll();
+        if (books.size() == 0) {
+            Book book1 = new Book();
+            book1.setSubject("자바");
+            book1.setPrice(30000);
+            book1.setAuthor("나길동");
+            book1.setPage(600);
+            bookService.save(book1);
 
-        List<HomeEntity> homes = homeService.getAll();
-        if (homes.size()==0){
-            HomeEntity homeEntity1 = new HomeEntity();
-            homeEntity1.setName("eddy");
-            homeEntity1.setCreatedAt(LocalDateTime.now());
-            homeService.save(homeEntity1);
-
-            HomeEntity homeEntity2 = new HomeEntity();
-            homeEntity2.setName("julia");
-            homeEntity2.setCreatedAt(LocalDateTime.now());
-            homeService.save(homeEntity2);
+            Book book2 = new Book();
+            book2.setSubject("파이썬");
+            book2.setPrice(37000);
+            book2.setAuthor("김길동");
+            book2.setPage(800);
+            bookService.save(book2);
         }
-
     }
 }

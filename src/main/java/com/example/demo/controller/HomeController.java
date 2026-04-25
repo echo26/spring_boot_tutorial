@@ -16,11 +16,6 @@ public class HomeController {
     @Autowired
     private homeService homeService;
 
-    @GetMapping("/home")
-    public String home() {
-        return "index";
-    }
-
     @GetMapping("/memberList")
     public String memberList(Model model) {
         List<HomeEntity> memberList = homeService.getAll();
