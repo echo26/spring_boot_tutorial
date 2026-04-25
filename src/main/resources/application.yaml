@@ -1,0 +1,17 @@
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    username: ${DB_USERNAME:eddy}
+    hikari:
+      maximum-pool-size: '20'
+      connection-timeout: '30000'
+      minimum-idle: '2'
+    url: jdbc:postgresql://localhost:5432/spring_app
+    password: ${DB_PASSWORD:}
+  application:
+    name: helloboot
+  jpa:
+    hibernate:
+      ddl-auto: update
+server:
+  port: '8080'
